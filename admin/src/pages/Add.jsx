@@ -26,6 +26,7 @@ function Add() {
   const handleAddProduct = async (e) => {
     setLoading(true)
     e.preventDefault()
+    console.log(image1, image2, image3, image4)
     try {
       let formData = new FormData()
       formData.append("name",name)
@@ -41,8 +42,7 @@ function Add() {
       formData.append("image4",image4)
 
       let result = await axios.post(serverUrl + "/api/product/addproduct" , formData, {withCredentials:true} )
-
-      console.log(result.data)
+      console.log("result from Add.jsx is : ",result.data)
       toast.success("ADD Product Successfully")
       setLoading(false)
 
@@ -61,12 +61,13 @@ function Add() {
 
       
     } catch (error) {
-       console.log(error)
+       console.log("error occured in Add.jsx through admin : ", error)
+       console.log("Error response data:", error.response.data);
        setLoading(false)
        toast.error("Add Product Failed")
     }
-
     
+
   }
   return (
     <div className='w-[100vw] min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] text-[white] overflow-x-hidden relative'>
@@ -179,10 +180,6 @@ function Add() {
        </div>
 
        <button className='w-[140px] px-[20px] py-[20px] rounded-xl bg-[#65d8f7] flex items-center justify-center gap-[10px] text-black active:bg-slate-700 active:text-white active:border-[2px] border-white'>{loading ? <Loading/> : "Add Product"}</button>
-
-
-
-
       </form>
     </div>
     </div>

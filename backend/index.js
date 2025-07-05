@@ -28,11 +28,11 @@ app.use("/api/cart",cartRoutes)
 app.use("/api/order",orderRoutes)
 
 
-
-
-app.listen(port,()=>{
-    console.log("Hello From Server")
-    connectDb()
+//Connection with DB
+connectDb().then(()=>{
+    app.listen(port, () => {
+      console.log(`The server is running on http://localhost:${port}`);
+    });
 })
 
 
